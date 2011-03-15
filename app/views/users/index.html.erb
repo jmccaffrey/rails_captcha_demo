@@ -17,7 +17,7 @@
 <% settings = []
 	settings[0]= {:image_style =>'simply_red', :distortion =>'high'}
 	settings[1]= {:image_style =>'random', :distortion =>'medium'}
-	settings[2]= {:image_style =>'random', :distortion =>'medium', :code_type => 'numeric'}
+	settings[2]= {:image_style =>'random', :distortion =>'high', :code_type => 'numeric'}
 	
 	num = params[:num] || 0
 	selection = settings[num.to_i]
