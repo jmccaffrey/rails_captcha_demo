@@ -1,10 +1,7 @@
 <h1>Listing users</h1>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-  </tr>
+  <tr> <th>Name</th>  <th>Email</th></tr>
 
 <% @users.each do |user| %>
   <tr>
@@ -17,15 +14,29 @@
 <% end %>
 </table>
 
-<br />
+<% settings = []
+	settings[0]= {:image_style =>'simply_red', :distortion =>'high'}
+	settings[1]= {:image_style =>'random', :distortion =>'medium'}
+	settings[2]= {:image_style =>'random', :distortion =>'medium', :code_type => 'numeric'}
+	
+	num = params[:num] || 0
+	selection = settings[num.to_i]
+%>
 
-examples of simple captcha 
-red, high, alpha
-<%= show_simple_captcha(:image_style =>'simply_red', :distortion =>'high') %>
-random, medium, alpha
-<%= show_simple_captcha(:image_style =>'random', :distortion =>'medium') %>
-random, medium, numeric
-<%= show_simple_captcha(:image_style =>'random', :distortion =>'medium', :code_type => 'numeric') %>
+<h3> Examples</h3>
+Using settings described at <a href="http://expressica.com/simple_captcha/">http://expressica.com/simple_captcha</a>
+<br><br>
+<% settings.each_with_index do |entry, index| %>
+	<a href="/?num=<%=index%>">show_simple_captcha(<%= entry.inspect %>)</a>
+	<br>
+<%end%>
 
+<pre style="width: 600px;">Using <%= selection.inspect%></pre>
+<div style="padding-left: 150px">
+<%= show_simple_captcha(selection) %>
+<button> <a style="text-decoration:none" href="/?num=<%=num%>">refresh to see some variation</a></button>
+</div>
+
+<br>
 go to the new user page to actually use the captcha
 <%= link_to 'New user', new_user_path %>
