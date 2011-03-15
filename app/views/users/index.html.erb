@@ -19,4 +19,13 @@
 
 <br />
 
+examples of simple captcha 
+red, high, alpha
+<%= show_simple_captcha(:image_style =>'simply_red', :distortion =>'high') %>
+random, medium, alpha
+<%= show_simple_captcha(:image_style =>'random', :distortion =>'medium') %>
+random, medium, numeric
+<%= show_simple_captcha(:image_style =>'random', :distortion =>'medium', :code_type => 'numeric') %>
+
+go to the new user page to actually use the captcha
 <%= link_to 'New user', new_user_path %>
