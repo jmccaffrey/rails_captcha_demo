@@ -82,7 +82,11 @@ class PostsController < ApplicationController
     end
   end
   
-  # def render_or_redirect_for_captcha_failure
-  #    return
-  #  end
+  def render_or_redirect_for_captcha_failure
+     return
+   end
+   
+   def captcha_passed?
+     RAILS_ENV.downcase != 'development' && cookies[:captcha_status] == encrypt("passed") 
+   end
 end
