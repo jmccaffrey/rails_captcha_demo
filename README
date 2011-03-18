@@ -5,6 +5,9 @@ a few examples of captcha on a rails 2.3.5 app
 http://simple-captcha-demo.heroku.com/
 
 blog post on http://railsperformance.blogspot.com
+http://railsperformance.blogspot.com/2011/03/rails-captcha-plugins.html
+
+github repo https://github.com/jmccaffrey/rails_captcha_demo
 
 My requirements were:
  "add a captcha to the forgot password page"
