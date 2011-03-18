@@ -86,7 +86,9 @@ class PostsController < ApplicationController
      return
    end
    
+   # prevent default logic of setting a cookie, and never challenging this user again
+   # we always want to challenge this user,
    def captcha_passed?
-     RAILS_ENV.downcase != 'development' && cookies[:captcha_status] == encrypt("passed") 
+     false
    end
 end
