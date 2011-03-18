@@ -2,7 +2,6 @@
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
-	<%= flash[:error]%>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
