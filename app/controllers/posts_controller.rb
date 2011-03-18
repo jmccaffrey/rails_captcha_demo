@@ -83,12 +83,12 @@ class PostsController < ApplicationController
   end
   
   def render_or_redirect_for_captcha_failure
-     return
-   end
+    params[:captcha_answer] = nil
+    params[:captcha_id] = nil
+    create_brain_buster
+    @post = Post.new(params[:post])
+    flash[:error] = "please answer the security question"
+    render :action => "new"
+  end
    
-   # prevent default logic of setting a cookie, and never challenging this user again
-   # we always want to challenge this user,
-   def captcha_passed?
-     false
-   end
 end

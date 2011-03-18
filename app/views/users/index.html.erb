@@ -8,13 +8,13 @@
     <td><%=h user.name %></td>
     <td><%=h user.email %></td>
     <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %> demonstrates <a href="http://www.google.com/recaptcha" target="_blank">google's recaptcha</a> </td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<!-- should make the config values a drop down and just let the user post what they want to see>
+<!-- should make the config values a drop down and just let the user post what they want to see -->
 
 <% settings = []
 	settings[0]= {:image_style =>'simply_red', :distortion =>'high'}
@@ -25,7 +25,7 @@
 	selection = settings[num.to_i]
 %>
 
-<h3> Examples</h3>
+<h3> Simple-Captcha Example</h3>
 Using settings described at <a href="http://expressica.com/simple_captcha/">http://expressica.com/simple_captcha</a>
 <br><br>
 <% settings.each_with_index do |entry, index| %>
@@ -40,5 +40,26 @@ Using settings described at <a href="http://expressica.com/simple_captcha/">http
 </div>
 
 <br>
-go to the new user page to actually use the captcha
+go to the new user page to actually use  simple-captcha
 <%= link_to 'New user', new_user_path %>
+<br>
+
+<h3> reCaptcha Example</h3>
+	<a href="http://www.google.com/recaptcha" target="_blank">google's recaptcha</a> 
+	<div style="padding-left: 150px">
+		<%= recaptcha_tags %>
+	</div>
+<h3> BrainBuster Example</h3>
+try <a href="https://github.com/rsanheim/brain_buster" target="_blank">BrainBuster captcha</a> on the <%= link_to 'New post', new_post_path %> page
+	<div style="padding-left: 150px; width: 500px;">
+		BrainBuster uses a simple logic question that many users find less intimidating than the standard distorted image.
+		<br>
+		
+		<%= render :partial => '/captcha' %>
+	</div>
+		
+<br>
+<br>		
+		
+		
+		
