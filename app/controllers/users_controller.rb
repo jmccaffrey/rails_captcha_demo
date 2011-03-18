@@ -58,16 +58,16 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
-
-    respond_to do |format|
+    if verify_recaptcha
       if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to(@user) }
-        format.xml  { head :ok }
+        redirect_to(@user) 
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        render :action => "edit"
       end
+    else  
+      flash[:error] = 'Captcha no good' 
+      render :action => "edit"
     end
   end
 
