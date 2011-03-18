@@ -32,6 +32,13 @@
 
 <h3> Simple-Captcha Example</h3>
 Using settings described at <a href="http://expressica.com/simple_captcha/">http://expressica.com/simple_captcha</a>
+
+simple-captcha
+<ul>
+	<li>requires db:migrate to persist the keyed answer 	</li>
+	<li>	requires rmagick to create the image</li>
+	<li>	works well, easy enough to change</li>
+	</ul>
 <br>
 click to change the current config
 <br>
@@ -54,6 +61,21 @@ go to the new user page to actually use  simple-captcha
 
 <h3> reCaptcha Example</h3>
 	<a href="http://www.google.com/recaptcha" target="_blank">google's recaptcha</a> 
+	
+	<ul>
+		<li>commonly used 	</li>
+		<li>requires outbound http call, (may have to deal with proxies)</li>
+		<li>handles ssl</li>
+		<li>can play audio if text is too hard	</li>
+		<li>requires 2 text inputs	</li>
+		<li>expects rails 2.3.8, html_safe, had to monkey patch a do nothing method</li>
+		<li>has styling options, but I had problems getting it to look right in the form I was using 
+			(moving it outside my fieldset made it look fine, so its just a matter of figuring out what crazy style was going on there)
+		</li>
+		</ul>
+			
+			
+		
 	<%= link_to 'Edit a user', edit_user_path(:id =>1)%> to see it in action
 	click the audio button to hear how that works
 	<div style="padding-left: 150px">
@@ -61,6 +83,19 @@ go to the new user page to actually use  simple-captcha
 	</div>
 <h3> BrainBuster Example</h3>
 try <a href="https://github.com/rsanheim/brain_buster" target="_blank">BrainBuster captcha</a> on the <%= link_to 'New post', new_post_path %> page
+
+<ul>
+<li>doesn't make 3rd party outbound call                                                                                 </li>
+<li>doesn't require rmagick                                                                                              </li>
+<li>does require a db table to store a set of questions                                                                  </li>
+<li>presents the user with a set of logic questions                                                                      </li>
+<li>by default uses cookies to flag that a user has answered successfully, but that can be turned off to always challenge</li>
+<li>
+	when a question uses words for numbers handles numeric to text conversion (five vs. 5) as in
+	<br> 
+	<span style="padding-left: 20px;">what is ten divided by two?</span>
+	</li>
+</ul>
 	<div style="padding-left: 150px; width: 500px;">
 		BrainBuster uses a simple logic question that many users find less intimidating than the standard distorted image.
 		<br>
