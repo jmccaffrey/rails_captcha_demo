@@ -19,6 +19,17 @@ Simple-Captcha
 		1. requires rmagick to create the image
 		2. requires db:migrate to persist the keyed answer
 		3. works well, easy enough to change
+		
+		
+		script/plugin install svn://rubyforge.org/var/svn/expressica/plugins/simple_captcha 
+		  rake simple_captcha:setup  
+		  rake db:migrate
+
+		 #add to routes
+		   map.simple_captcha '/simple_captcha/:action', :controller =&gt; 'simple_captcha'
+
+		 #add to application_controller
+		   include SimpleCaptcha::ControllerHelpers
 
 reCaptcha (sponsored by google)
    http://www.google.com/recaptcha
@@ -28,6 +39,41 @@ reCaptcha (sponsored by google)
 		4. can play audio if text is too hard
 		5. expects String.html_safe (rails > 2.3.7), had to monkey patch a do nothing method
 		6. has styling options, but I had problems getting it to look right in the form I was using 
+		
+		script/plugin install git://github.com/ambethia/recaptcha.git
+
+		# in config/initializers/recaptcha.rb
+
+		  #monkey patch to fix html_safe method
+		  class String
+		    def html_safe
+		      self
+		    end
+		  end
+
+		  # get an api key (free) from http://www.google.com/recaptcha
+		  ENV['RECAPTCHA_PUBLIC_KEY'] = 'youractualpublickey'
+		  ENV['RECAPTCHA_PRIVATE_KEY'] = 'youractualprivatekey'
+
+		# in the view, inside your form
+
+		<%= recaptcha_tags %>
+
+		# in the controller
+		 def update
+		    @user = User.find(params[:id])
+		    if verify_recaptcha
+		      if @user.update_attributes(params[:user])
+		        flash[:notice] = 'User was successfully updated.'
+		        redirect_to(@user) 
+		      else
+		        render :action => "edit"
+		      end
+		    else  
+		      flash[:error] = 'Captcha no good' 
+		      render :action => "edit"
+		    end
+		  end
 
 BrainBuster
    https://github.com/rsanheim/brain_buster
