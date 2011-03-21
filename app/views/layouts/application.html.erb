@@ -13,7 +13,12 @@
 <p style="color: red"><%= flash[:error] %></p>
 
 <h2><%= link_to 'Rails Captcha Demo', users_path, :style=>"text-decoration: none;"%></h2>
+
 | <%= link_to 'simple-captcha', new_user_path%> | <%= link_to 'reCaptcha', edit_user_path(:id =>1)%> | <%= link_to 'BrainBuster', new_post_path %> |
+
+<br/>
+<a href="http://railsperformance.blogspot.com/2011/03/rails-captcha-plugins.html"> Blog post with additional notes and comments</a>
+<br/>
 
 <%= yield %>
 
