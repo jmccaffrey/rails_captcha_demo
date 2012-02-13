@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-      logger.info("the id was #{param[:id]}")
+      logger.info("the id was #{params[:id]}")
       raise "no fool"
     respond_to do |format|
       format.html # show.html.erb
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy unless params[:id] == '1'
-    logger.info("the id was #{param[:id]}")
+    logger.info("the id was #{params[:id]}")
 
     respond_to do |format|
       format.html { redirect_to(users_url) }
