@@ -15,8 +15,6 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-      logger.info("the id was #{params[:id]}")
-      raise "no fool"
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -42,10 +40,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
-    attrs = params[:user]
-    attrs = attrs.merge({:id => 1}) unless User.exists?(1) #set to first id 
-    @user = User.new(attrs)
+    @user = User.new(params[:user])
       if simple_captcha_valid? 
+        @user.id = 1 unless User.exists?(1) #set to first id 
         if @user.save
           flash[:notice] = 'User was successfully created.'
             redirect_to(@user) 
@@ -80,7 +77,6 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy unless params[:id] == '1'
-    logger.info("the id was #{params[:id]}")
 
     respond_to do |format|
       format.html { redirect_to(users_url) }
